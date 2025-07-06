@@ -23,6 +23,8 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import CarCrashIcon from "@mui/icons-material/CarCrash";
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import { red } from "@mui/material/colors"; // ✅ red imported
+
 
 import Map from "../components/Map";
 
@@ -60,7 +62,7 @@ const Dashboard = () => {
 
           <Button
             variant="contained"
-            color="primary"
+            color="error"
             onClick={handleImageUpload}
             startIcon={<AddIcon />}
             sx={{
@@ -115,37 +117,37 @@ const Dashboard = () => {
         <IconCircleWithTitle
           icon={LocalPoliceIcon}
           title="Police"
-          bgColor="#1976d2" // optional
+          bgColor="red" // optional
           iconColor="#fff" // optional
         />
         <IconCircleWithTitle
           icon={LocalHospitalIcon}
           title="Hospital"
-          bgColor="#1976d2" // optional
+          bgColor="red" // optional
           iconColor="#fff" // optional
         />
         <IconCircleWithTitle
           icon={LocalFireDepartmentIcon}
           title="Fire Birgade"
-          bgColor="#1976d2" // optional
+          bgColor="red" // optional
           iconColor="#fff"
         />
         <IconCircleWithTitle
           icon={PhoneInTalkIcon}
           title="Phone in Talk"
-          bgColor="#1976d2" // optional
+          bgColor="red" // optional
           iconColor="#fff" // optional
         />
                 <IconCircleWithTitle
           icon={CarCrashIcon}
           title="Car Crash"
-          bgColor="#1976d2" // optional
+          bgColor="red" // optional
           iconColor="#fff" // optional
         />
                 <IconCircleWithTitle
           icon={ReportProblemIcon}
           title="Report to Police"
-          bgColor="#1976d2" // optional
+          bgColor="red" // optional
           iconColor="#fff" // optional
         />
       </Box>

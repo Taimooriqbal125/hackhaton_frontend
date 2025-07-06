@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { red } from '@mui/material/colors';  // ✅ import red
 
-const IconCircleWithTitle = ({ icon: Icon, title, bgColor = '#e0e0e0', iconColor = '#000' }) => {
+const IconCircleWithTitle = ({ icon: Icon, title, bgColor = red[500], iconColor = '#000' }) => {
   return (
     <Box
       display="flex"
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ width: 100,
-        }}
+      sx={{ width: 100 }}
     >
       <Box
         sx={{
@@ -21,11 +21,12 @@ const IconCircleWithTitle = ({ icon: Icon, title, bgColor = '#e0e0e0', iconColor
           alignItems: 'center',
           justifyContent: 'center',
           mb: 1,
-            cursor: 'pointer',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-        '&:hover': {
-          transform: 'translateY(-6px) scale(1.05)',
-          boxShadow: 3,}
+          cursor: 'pointer',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          '&:hover': {
+            transform: 'translateY(-6px) scale(1.05)',
+            boxShadow: 3,
+          },
         }}
       >
         <Icon style={{ fontSize: 30, color: iconColor }} />

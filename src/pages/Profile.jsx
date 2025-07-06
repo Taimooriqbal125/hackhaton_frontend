@@ -1,18 +1,19 @@
-// src/pages/Profile.jsx
 import React from 'react';
 import {
   Avatar,
   Box,
-  Button,
   Card,
   CardContent,
-  Grid,
-  TextField,
   Typography,
   Divider,
 } from '@mui/material';
+import { useUser } from '@clerk/clerk-react';
 
 export default function Profile() {
+  const { user } = useUser();
+
+  if (!user) return null; // optional: or show loading
+
   return (
     <Box
       sx={{
@@ -35,21 +36,21 @@ export default function Profile() {
       >
         <Box display="flex" alignItems="center" gap={3}>
           <Avatar
-            src="https://i.pravatar.cc/150?img=15"
-            sx={{ width: 90, height: 90, border: '3px solid #1976d2' }}
+            src={user.imageUrl}
+            sx={{ width: 90, height: 90, border: '3px solid rgb(54, 130, 206)' }}
           />
           <Box>
             <Typography variant="h5" fontWeight="bold">
-              Taimoor Iqbal
+              {user.fullName || 'No Name'}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              taimoor_iqbal_21@gmail.com
+              {user.emailAddresses[0]?.emailAddress || 'No Email'}
             </Typography>
           </Box>
         </Box>
       </Card>
 
-      {/* Info Form */}
+      {/* Static Info Card */}
       <Card
         elevation={3}
         sx={{
@@ -60,61 +61,16 @@ export default function Profile() {
       >
         <CardContent>
           <Typography variant="h6" fontWeight="medium" gutterBottom>
-            ✍️ Edit Personal Info
+            👤 Your Info
           </Typography>
-          <Divider sx={{ mb: 3 }} />
+          <Divider sx={{ mb: 2 }} />
 
-          <Grid container spacing={3}>
-            <Grid xs={12} sm={6}>
-              <TextField
-                label="Full Name"
-                fullWidth
-                variant="outlined"
-                defaultValue="Taimoor Iqbal"
-              />
-            </Grid>
-            <Grid xs={12} sm={6}>
-              <TextField
-                label="Email"
-                fullWidth
-                variant="outlined"
-                defaultValue="taimoor_iqbal_21@gmail.com"
-              />
-            </Grid>
-            <Grid xs={12} sm={6}>
-              <TextField
-                label="Phone"
-                fullWidth
-                variant="outlined"
-                defaultValue="+92 300 1234567"
-              />
-            </Grid>
-            <Grid xs={12} sm={6}>
-              <TextField
-                label="City"
-                fullWidth
-                variant="outlined"
-                defaultValue="Faisalabad"
-              />
-            </Grid>
-          </Grid>
-
-          <Box sx={{ mt: 4, display: 'flex', gap: 2 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ borderRadius: '8px', px: 4 }}
-            >
-              Save
-            </Button>
-            <Button
-              variant="outlined"
-              color="error"
-              sx={{ borderRadius: '8px', px: 4 }}
-            >
-              Cancel
-            </Button>
-          </Box>
+          <Typography variant="body1" sx={{ mb: 1 }}>
+            <strong>Full Name:</strong> {user.fullName || 'N/A'}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Email:</strong> {user.emailAddresses[0]?.emailAddress || 'N/A'}
+          </Typography>
         </CardContent>
       </Card>
     </Box>

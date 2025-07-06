@@ -5,13 +5,15 @@ import About from "../pages/About";
 import Dashboard from "../pages/Dashboard";
 import DashboardLayout from "../components/DashboardLayout";
 import Profile from "../pages/Profile";
+import Help from "../pages/Help";
 
 function Navigationcontrol() {
   return (
     <Routes>
       <Route path="/" element={<DashboardLayout />}>
-        <Route path="about" element={<Dashboard />} />
-        <Route path="home" element={<Home />} />
+       <Route index element={<Home />} /> 
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="help" element={<Help/>} />
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>

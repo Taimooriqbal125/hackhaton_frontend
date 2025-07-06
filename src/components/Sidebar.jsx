@@ -8,14 +8,21 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { red } from "@mui/material/colors"; // already imported
+
 import { useNavigate } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import PeopleIcon from "@mui/icons-material/People";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useClerk } from "@clerk/clerk-react";
+
 const drawerWidth = 210;
 
 const Sidebar = ({ open, onClose, isMobile }) => {
   const navigate = useNavigate();
+
+  const { signOut } = useClerk(); // ✅ get signOut function
 
   return (
     <Drawer
@@ -29,7 +36,7 @@ const Sidebar = ({ open, onClose, isMobile }) => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          backgroundColor: "primary.main",
+          backgroundColor: red[500], // ✅ updated
           padding: 0,
         },
       }}
@@ -37,11 +44,11 @@ const Sidebar = ({ open, onClose, isMobile }) => {
       <List style={{ marginTop: 70 }}>
         <ListItem
           button
-          onClick={() => navigate("about")}
+          onClick={() => navigate("dashboard")}
           sx={{
             borderTopLeftRadius: 20,
             borderBottomLeftRadius: 20,
-            borderTopRightRadius: 8, // smaller radius on right
+            borderTopRightRadius: 8,
             borderBottomRightRadius: 8,
             "&:hover": {
               backgroundColor: "white",
@@ -53,24 +60,8 @@ const Sidebar = ({ open, onClose, isMobile }) => {
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem
-          button
-           onClick={() => navigate("home")}
-          sx={{
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
-            borderTopRightRadius: 8, // smaller radius on right
-            borderBottomRightRadius: 8,
-            "&:hover": {
-              backgroundColor: "white",
-            },
-          }}
-        >
-          <ListItemIcon>
-            <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Users" />
-        </ListItem>
+
+
         <ListItem
           button
           onClick={() => navigate("profile")}
@@ -84,14 +75,39 @@ const Sidebar = ({ open, onClose, isMobile }) => {
             },
           }}
         >
-          <ListItemText primary="Users" />
+          <ListItemIcon>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Profile" />
         </ListItem>
+
         <ListItem
           button
+          onClick={() => navigate("help")}
           sx={{
             borderTopLeftRadius: 20,
             borderBottomLeftRadius: 20,
-            borderTopRightRadius: 8, // smaller radius on right
+            borderTopRightRadius: 8,
+            borderBottomRightRadius: 8,
+            "&:hover": {
+              backgroundColor: "white",
+            },
+          }}
+        >
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Help" />
+        </ListItem>
+
+
+        <ListItem
+          button
+          onClick={() => signOut(() => (window.location.href = "/"))}
+          sx={{
+            borderTopLeftRadius: 20,
+            borderBottomLeftRadius: 20,
+            borderTopRightRadius: 8,
             borderBottomRightRadius: 8,
             "&:hover": {
               backgroundColor: "white",
@@ -101,9 +117,10 @@ const Sidebar = ({ open, onClose, isMobile }) => {
           <ListItemIcon>
             <LogoutOutlinedIcon />
           </ListItemIcon>
-          <ListItemText primary="Users" />
+          <ListItemText primary="Logout" />
         </ListItem>
       </List>
+
       <Box sx={{ p: 2, color: "white", mt: 5 }}>
         <Typography variant="h6" gutterBottom>
           FMISC Help Desk
@@ -112,7 +129,7 @@ const Sidebar = ({ open, onClose, isMobile }) => {
         {/* Phone Numbers */}
         <Box
           sx={{
-            backgroundColor: "primary.dark",
+            backgroundColor: red[700], // ✅ changed from "primary.dark"
             borderRadius: 2,
             p: 1,
             mb: 1,
@@ -128,7 +145,7 @@ const Sidebar = ({ open, onClose, isMobile }) => {
         {/* Emails */}
         <Box
           sx={{
-            backgroundColor: "primary.dark",
+            backgroundColor: red[700], // ✅ changed from "primary.dark"
             borderRadius: 2,
             p: 1,
             mb: 1,
